@@ -4,7 +4,7 @@ const BACKGROUND = "#0a0c12";
 
 const config: ExpoConfig = {
   name: "Profyla",
-  slug: "profyla",
+  slug: "profyla-mobile",
   scheme: "profyla",
   version: "0.1.0",
   orientation: "portrait",
