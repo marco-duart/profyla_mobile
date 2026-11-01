@@ -1,56 +1,50 @@
-# Welcome to your Expo app 👋
+# Profyla Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App do **candidato** do Profyla (React Native + Expo SDK 58, TypeScript, Expo Router). Cobre cadastro, onboarding por micro-passos, importação do currículo em PDF, vagas com gestos, candidaturas, testes DISC e Eneagrama, notificações e perfil. O recrutador continua só na web (`profyla_front`).
 
-## Get started
+O plano completo está em `../PROFYLA_MOBILE_PLAN.md`. Regras do projeto para agentes: `AGENTS.md`.
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Rodando
 
 ```bash
-npm run reset-project
+npm install
+cp .env.example .env          # EXPO_PUBLIC_API_URL e EXPO_PUBLIC_WEB_URL
+npx expo start                # a, i ou w; Expo Go não basta para o calendário: use um development build
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+A API (`../profyla_api`) precisa subir com o ambiente explícito, porque o `.env` dela tem `RAILS_ENV=production`:
 
-### Other setup steps
+```bash
+RAILS_ENV=development FRONTEND_URL=http://localhost:8081 bundle exec rails server -p 3000
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- Emulador Android: `EXPO_PUBLIC_API_URL=http://10.0.2.2:3000`. Celular físico: o IP da máquina na rede.
+- Usuária de demonstração (seeds): `candidata@profyla.com` / `Talento@123`.
 
-## Learn more
+## Verificação
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm run typecheck && npm run lint && npm test
+npx expo-doctor
+npx expo export --platform android      # confere o bundle nativo
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Fluxos ponta a ponta (Maestro, sem custo) em `maestro/`: `maestro test maestro/`. Distribuição interna: `docs/DISTRIBUICAO.md`.
 
-## Join the community
+## Estrutura
 
-Join our community of developers creating universal apps.
+| Pasta | O que tem |
+|---|---|
+| `src/app` | Rotas (Expo Router). Grupos `(auth)`, `(consent)`, `(onboarding)`, `(tabs)` protegidos por `Stack.Protected` conforme o estado da sessão |
+| `src/api` | Cliente HTTP (devise_token_auth com rotação de token), DTOs, fila de mutações |
+| `src/features` | Sessão, microfluxos, onboarding, importação de PDF, vagas, candidaturas, testes, notificações, perfil |
+| `src/gestures` | Cartões deslizáveis (regras puras testáveis em `decide.ts`) |
+| `src/ui` | Design system (tokens, botões, folha inferior, avisos com "Desfazer") |
+| `src/i18n` | Textos em pt-BR |
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Princípios
+
+- Todo gesto é atalho: existe sempre um botão visível e uma `accessibilityAction` equivalente.
+- Ações reversíveis têm 5 s de "Desfazer" antes de ir ao servidor; as irreversíveis (excluir conta) nunca são por gesto.
+- Um assunto por tela; escolher é preferível a digitar.
+- Sem custo: nenhuma dependência paga e nenhum serviço externo obrigatório.
