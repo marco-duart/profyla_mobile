@@ -1,0 +1,9 @@
+appId: com.profyla.app
+name: Candidatar-se pelo botão (equivalente ao gesto) e desfazer
+---
+- launchApp
+- tapOn: "Vagas"
+- tapOn: "Quero esta vaga"
+- assertVisible: "Desfazer"
+- tapOn: "Desfazer"
+- assertNotVisible: "Candidatura enviada!"

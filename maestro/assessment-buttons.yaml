@@ -1,0 +1,8 @@
+appId: com.profyla.app
+name: Responder uma afirmação do teste pelos botões
+---
+- launchApp
+- tapOn: "Testes"
+- tapOn: "Fazer o teste"
+- tapOn: "Concordo totalmente"
+- assertVisible: "O quanto você concorda com esta afirmação?"

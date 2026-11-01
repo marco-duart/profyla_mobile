@@ -1,0 +1,15 @@
+appId: com.profyla.app
+name: Entrar e ver as abas
+---
+- launchApp:
+    clearState: true
+- tapOn: "Já tenho conta"
+- tapOn: "E-mail"
+- inputText: "candidata@profyla.com"
+- tapOn: "Senha"
+- inputText: "Talento@123"
+- hideKeyboard
+- tapOn: "Entrar"
+- assertVisible: "Candidaturas"
+- tapOn: "Perfil"
+- assertVisible: "Beatriz Nakamura"
