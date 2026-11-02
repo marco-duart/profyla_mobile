@@ -77,6 +77,7 @@ export const t = {
   tabs: { jobs: "Vagas", applications: "Candidaturas", assessments: "Testes", profile: "Perfil" },
   states: { errorTitle: "Algo deu errado", offline: "Sem conexão. Mostrando o que já foi carregado." },
   undo: "Desfazer",
+  novidades: { title: "Novidades da Maaxis" },
   notifications: {
     title: "Notificações",
     markAll: "Marcar todas como lidas",
@@ -161,6 +162,7 @@ export const t = {
     accountData: "Dados da conta e senha",
     privacy: "Privacidade e e-mails",
     dismissed: "Vagas dispensadas",
+    novidades: "Novidades da Maaxis",
     terms: "Termos de uso",
     privacyPolicy: "Política de privacidade",
     signOut: "Sair da conta",

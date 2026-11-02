@@ -7,6 +7,7 @@ import type { OpportunityList } from "@/api/dto";
 import { SwipeCard } from "@/gestures/SwipeCard";
 import { GestureHint } from "@/gestures/GestureHint";
 import { jobSummary, JobCard } from "@/features/jobs/JobCard";
+import { NovidadesHome } from "@/features/novidades/NovidadesHome";
 import { useApplyToJob } from "@/features/jobs/useApplyToJob";
 import { useDismissedJobs } from "@/features/jobs/useDismissedJobs";
 import { useGestureHint } from "@/features/jobs/useGestureHint";
@@ -93,6 +94,8 @@ export default function JobsFeed() {
           onAction={() => router.push("/(tabs)/profile")}
         />
       ) : null}
+
+      <NovidadesHome />
 
       <Sheet visible={searchOpen} onClose={() => setSearchOpen(false)} title="Buscar vagas" closeLabel="Cancelar">
         <TextField label="Título da vaga" value={draft} onChangeText={setDraft} placeholder="Ex.: analista, vendedor" autoFocus returnKeyType="search" onSubmitEditing={() => { setSearch(draft.trim()); setSearchOpen(false); }} />

@@ -48,6 +48,7 @@ function Navigation() {
       <Stack.Protected guard={gate === "ready"}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="notifications" />
+        <Stack.Screen name="novidades" />
         <Stack.Screen name="import" />
       </Stack.Protected>
       {/* Textos legais abrem em qualquer estado (cadastro, aceite, conta). */}

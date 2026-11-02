@@ -204,6 +204,7 @@ export default function Profile() {
         <Button label={t.profile.accountData} variant="secondary" onPress={() => router.push("/profile/account")} />
         <Button label={t.profile.privacy} variant="secondary" onPress={() => router.push("/profile/privacy")} />
         <Button label={t.profile.dismissed} variant="secondary" onPress={() => router.push("/profile/dismissed")} />
+        <Button label={t.profile.novidades} variant="secondary" onPress={() => router.push("/novidades")} />
         <Button label={t.profile.terms} variant="ghost" onPress={() => router.push({ pathname: "/legal/[kind]", params: { kind: "terms" } })} />
         <Button label={t.profile.privacyPolicy} variant="ghost" onPress={() => router.push({ pathname: "/legal/[kind]", params: { kind: "privacy" } })} />
       </Surface>
